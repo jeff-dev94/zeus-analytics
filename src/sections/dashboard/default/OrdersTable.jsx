@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 // material-ui
 import Box from '@mui/material/Box';
-import { Button, Input, Space, Table } from 'antd';
+import { ConfigProvider, Button, Input, Space, Table } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 
@@ -228,18 +228,35 @@ export default function OrderTable() {
 
   return (
     <Box>
-      <Table
-        bordered
-        dataSource={dataSource}
-        columns={columns}
-        onRow={(record, rowIdx) => {
-          return {
-            onClick: (event) => {
-              navigate(`/miners/${record.no}`)
-            }
-          }
+      <ConfigProvider
+        theme={{
+          components: {
+            Table: {
+              // vertical padding (top + bottom) inside cells
+              cellPaddingBlock: 8,    // px
+              // horizontal padding (left + right) inside cells
+              cellPaddingInline: 8,   // px
+              // optional: header-only padding
+              headerCellPaddingBlock: 8,
+              headerCellPaddingInline: 8,
+            },
+          },
         }}
-      />;
+      >
+        <Table
+          cellPaddingBlock={0}
+          bordered
+          dataSource={dataSource}
+          columns={columns}
+          onRow={(record, rowIdx) => {
+            return {
+              onClick: (event) => {
+                navigate(`/miners/${record.no}`)
+              }
+            }
+          }}
+        />
+      </ConfigProvider>
     </Box>
   );
 }
