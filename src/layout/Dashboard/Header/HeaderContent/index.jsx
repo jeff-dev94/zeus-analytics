@@ -20,9 +20,9 @@ export default function HeaderContent() {
 
   return (
     <>
-      {!downLG && <Search />}
+      {/* {!downLG && <Search />} */}
       {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
-      <IconButton
+      {/* <IconButton
         component={Link}
         href="https://github.com/codedthemes/mantis-free-react-admin-template"
         target="_blank"
@@ -35,8 +35,8 @@ export default function HeaderContent() {
       </IconButton>
 
       <Notification />
-      {!downLG && <Profile />}
-      {downLG && <MobileSection />}
+      {!downLG && <Profile />} */}
+      {/* {downLG && <MobileSection />} */}
     </>
   );
 }
