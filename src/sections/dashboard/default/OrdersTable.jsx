@@ -1,15 +1,7 @@
 import PropTypes from 'prop-types';
 // material-ui
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Table } from 'antd';
 
 // third-party
 import { NumericFormat } from 'react-number-format';
@@ -17,187 +9,121 @@ import { NumericFormat } from 'react-number-format';
 // project imports
 import Dot from 'components/@extended/Dot';
 
-function createData(tracking_no, name, fat, carbs, protein) {
-  return { tracking_no, name, fat, carbs, protein };
-}
-
-const rows = [
-  createData(84564564, 'Camera Lens', 40, 2, 40570),
-  createData(98764564, 'Laptop', 300, 0, 180139),
-  createData(98756325, 'Mobile', 355, 1, 90989),
-  createData(98652366, 'Handset', 50, 1, 10239),
-  createData(13286564, 'Computer Accessories', 100, 1, 83348),
-  createData(86739658, 'TV', 99, 0, 410780),
-  createData(13256498, 'Keyboard', 125, 2, 70999),
-  createData(98753263, 'Mouse', 89, 2, 10570),
-  createData(98753275, 'Desktop', 185, 1, 98063),
-  createData(98753291, 'Chair', 100, 0, 14001)
+const dataSource = [
+  {
+    key: '1',
+    no: '22',
+    uid: '1231251231231232',
+    coldkey: '5ch....d123',
+    hotkey: '531....23w1',
+    lastPredictionTime: '2025/10/28 15:30:25',
+    score: 0.6,
+    weight: 0.9
+  },
+  {
+    key: '2',
+    no: '22',
+    uid: '1231251231231233',
+    coldkey: '5ch....d124',
+    hotkey: '531....23w2',
+    lastPredictionTime: '2025/10/28 16:30:25',
+    score: 0.5,
+    weight: 0.2
+  },
+  {
+    key: '3',
+    no: '22',
+    uid: '1531251231231232',
+    coldkey: '5ch....d125',
+    hotkey: '531....23w3',
+    lastPredictionTime: '2025/10/28 17:30:25',
+    score: 0.5,
+    weight: 0.7
+  },
+  {
+    key: '4',
+    no: '22',
+    uid: '1231251231231236',
+    coldkey: '5ch....d126',
+    hotkey: '531....23w4',
+    lastPredictionTime: '2025/10/28 18:30:25',
+    score: 0.3,
+    weight: 0.9
+  },
+  {
+    key: '5',
+    no: '22',
+    uid: '1231251231231237',
+    coldkey: '5ch....d127',
+    hotkey: '531....23w5',
+    lastPredictionTime: '2025/10/28 19:30:25',
+    score: 0.7,
+    weight: 0.6
+  },
+  {
+    key: '6',
+    no: '22',
+    uid: '1231251231231238',
+    coldkey: '5ch....d128',
+    hotkey: '531....23w6',
+    lastPredictionTime: '2025/10/28 20:30:25',
+    score: 0.2,
+    weight: 0.8
+  },
 ];
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
+const columns = [
   {
-    id: 'tracking_no',
-    align: 'left',
-    disablePadding: false,
-    label: 'Tracking No.'
+    title: '#',
+    dataIndex: 'no',
+    key: 'no',
+    sorter: (a, b) => a.no - b.no,
   },
   {
-    id: 'name',
-    align: 'left',
-    disablePadding: true,
-    label: 'Product Name'
+    title: 'UID',
+    dataIndex: 'uid',
+    key: 'uid',
+    sorter: (a, b) => a.uid - b.uid,
   },
   {
-    id: 'fat',
-    align: 'right',
-    disablePadding: false,
-    label: 'Total Order'
+    title: 'Coldkey',
+    dataIndex: 'coldkey',
+    key: 'coldkey',
+    sorter: (a, b) => a.coldkey - b.coldkey,
   },
   {
-    id: 'carbs',
-    align: 'left',
-    disablePadding: false,
-
-    label: 'Status'
+    title: 'Hotkey',
+    dataIndex: 'hotkey',
+    key: 'hotkey',
+    sorter: (a, b) => a.hotkey - b.hotkey,
   },
   {
-    id: 'protein',
-    align: 'right',
-    disablePadding: false,
-    label: 'Total Amount'
-  }
+    title: 'Last Prediction Time',
+    dataIndex: 'lastPredictionTime',
+    key: 'lastPredictionTime',
+    sorter: (a, b) => a.lastPredictionTime - b.lastPredictionTime,
+  },
+  {
+    title: 'Score',
+    dataIndex: 'score',
+    key: 'score',
+    sorter: (a, b) => a.score - b.score,
+  },
+  {
+    title: 'Weight',
+    dataIndex: 'weight',
+    key: 'weight',
+    sorter: (a, b) => a.weight - b.weight,
+  },
 ];
-
-// ==============================|| ORDER TABLE - HEADER ||============================== //
-
-function OrderTableHead({ order, orderBy }) {
-  return (
-    <TableHead>
-      <TableRow>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.align}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            {headCell.label}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-function OrderStatus({ status }) {
-  let color;
-  let title;
-
-  switch (status) {
-    case 0:
-      color = 'warning';
-      title = 'Pending';
-      break;
-    case 1:
-      color = 'success';
-      title = 'Approved';
-      break;
-    case 2:
-      color = 'error';
-      title = 'Rejected';
-      break;
-    default:
-      color = 'primary';
-      title = 'None';
-  }
-
-  return (
-    <Stack direction="row" sx={{ gap: 1, alignItems: 'center' }}>
-      <Dot color={color} />
-      <Typography>{title}</Typography>
-    </Stack>
-  );
-}
 
 // ==============================|| ORDER TABLE ||============================== //
 
 export default function OrderTable() {
-  const order = 'asc';
-  const orderBy = 'tracking_no';
 
   return (
     <Box>
-      <TableContainer
-        sx={{
-          width: '100%',
-          overflowX: 'auto',
-          position: 'relative',
-          display: 'block',
-          maxWidth: '100%',
-          '& td, & th': { whiteSpace: 'nowrap' }
-        }}
-      >
-        <Table aria-labelledby="tableTitle">
-          <OrderTableHead order={order} orderBy={orderBy} />
-          <TableBody>
-            {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-              const labelId = `enhanced-table-checkbox-${index}`;
-
-              return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  tabIndex={-1}
-                  key={row.tracking_no}
-                >
-                  <TableCell component="th" id={labelId} scope="row">
-                    <Link color="secondary">{row.tracking_no}</Link>
-                  </TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell>
-                    <OrderStatus status={row.carbs} />
-                  </TableCell>
-                  <TableCell align="right">
-                    <NumericFormat value={row.protein} displayType="text" thousandSeparator prefix="$" />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Table dataSource={dataSource} columns={columns} />;
     </Box>
   );
 }
-
-OrderTableHead.propTypes = { order: PropTypes.any, orderBy: PropTypes.string };
-
-OrderStatus.propTypes = { status: PropTypes.number };

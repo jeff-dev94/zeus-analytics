@@ -45,7 +45,7 @@ export default function DashboardLayout() {
         >
           <Breadcrumbs />
           <Outlet />
-          <Footer />
+          {/* <Footer /> */}
         </Box>
       </Box>
     </Box>
