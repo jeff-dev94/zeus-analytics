@@ -33,12 +33,12 @@ const useStyle = createStyles(({ css, token }) => {
 });
 
 let dataSource = [];
-for (let i = -90; i <= 90; i += 0.25) {
+for (let i = -90; i <= 90; i += 10) {
     let oneRow = {
         key: i.toString(),
         rowHeader: i.toString(),
     }
-    for (let j = -180; j <= 180; j += 0.25) {
+    for (let j = -180; j <= 180; j += 10) {
         oneRow[j.toString()] = j.toString();
     }
     dataSource.push(oneRow)
@@ -148,7 +148,7 @@ export default function AnalyticsTable() {
   let columns = [
     { title: "", dataIndex: "rowHeader", key: "rowHeader", fixed: "left", width: 100 },
   ]
-  for (let i = -180; i <= 180; i += 0.25) {
+  for (let i = -180; i <= 180; i += 10) {
     if (i === -180) {
         columns.push({
             title: parseFloat(i.toFixed(2)).toString(),
