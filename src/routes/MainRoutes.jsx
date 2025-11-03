@@ -10,6 +10,9 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')))
 // render - miners detail
 const MinerDetail = Loadable(lazy(() => import('pages/miners/default')));
 
+// render - miners detail
+const AnalyticsDetail = Loadable(lazy(() => import('pages/analytics/default')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -30,9 +33,13 @@ const MainRoutes = {
       ]
     },
     {
+      path: 'miners/:id/analytics/:analyticsID',
+      element: <AnalyticsDetail />
+    },
+    {
       path: 'miners/:id',
       element: <MinerDetail />
-    }
+    },
   ]
 };
 
